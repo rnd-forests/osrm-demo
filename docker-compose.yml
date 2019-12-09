@@ -1,0 +1,38 @@
+version: "3.7"
+
+services: 
+  osrm-backend:
+    image: osrm/osrm-backend:latest
+    container_name: osrm_backend
+    restart: always
+    ports:
+      - "5005:5000"
+    volumes:
+      - ${PWD}/backend-data:/data
+    command:
+      - /data/routing.sh
+    tty: true
+  
+  osrm-frontend:
+    image: osrm/osrm-frontend:latest
+    container_name: osrm_frontend
+    restart: always
+    ports: 
+      - "9966:9966"
+    environment:
+      - http_proxy
+      - https_proxy
+    volumes:
+      - osrm-frontend-data:/data
+      - ./frontend-config/leaflet_options.js:/src/src/leaflet_options.js
+      - ./frontend-config/site.css:/src/css/site.css
+    tty: true
+    depends_on: 
+      - osrm-backend
+    tmpfs:
+      - /run
+      - /tmp
+
+volumes:
+  osrm-frontend-data:
+    driver: local
