@@ -2,7 +2,7 @@
 
 var L = require('leaflet');
 
-var omniscale = L.tileLayer('https://maps.omniscale.net/v2/testing-6d943476/style.default/{z}/{x}/{y}.png', {});
+var omniscale = L.tileLayer('https://maps.omniscale.net/v2/osrm-google-cloud-70dac493/style.default/{z}/{x}/{y}.png', {});
 var transportLight = L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=9fa04e77ade14217939ae104c7d1b9e3', {});
 var transportDark = L.tileLayer('https://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=9fa04e77ade14217939ae104c7d1b9e3', {});
 var outdoors = L.tileLayer('https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=9fa04e77ade14217939ae104c7d1b9e3', {});
@@ -16,7 +16,8 @@ module.exports = {
     waypoints: [],
     language: 'vi',
     alternative: 0,
-    layer: omniscale
+    layer: omniscale,
+    preferCanvas: true,
   },
   services: [{
     label: 'Car',
@@ -32,6 +33,9 @@ module.exports = {
   }],
   overlay: {
     //
+  },
+  baselayer: {
+    one: omniscale,
   }
 };
 

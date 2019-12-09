@@ -8,7 +8,7 @@ services:
     ports:
       - "5005:5000"
     volumes:
-      - ${PWD}/backend-data:/data
+      - ./backend-data:/data
     command:
       - /data/routing.sh
     tty: true
